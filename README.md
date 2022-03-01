@@ -1,4 +1,5 @@
 # async
+This is the liv coding example how use async features and promises in JavaScript
 
 ## Project setup
 ```
