@@ -13,86 +13,55 @@
         <button type="button" class="contact__button">Contact us</button>
       </div>
     </section>
-    <section id="about" class="about-section">
-      <div class="about-section-content">
-        <h2>About</h2>
-        <p>
-          Plop down in the middle where everybody walks hide from vacuum cleaner
-          mrow curl up and sleep on the freshly laundered towels plays league of
-          legends. Scratch so owner bleeds sit on the laptop bite nose of your
-          human. Cat walks in keyboard ignore the squirrels, you'll never catch
-          them anyway attack the dog then pretend like nothing happened claw at
-          curtains stretch and yawn nibble on tuna ignore human bite human hand,
-          then cats take over the world cereal boxes make for five star
-          accommodation . Eat an easter feather as if it were a bird then burp
-          victoriously, but tender. Leave fur on owners clothes fooled again
-          thinking the dog likes me so spill litter box, scratch at owner,
-          destroy all furniture, especially couch. Chirp at birds scratch the
-          postman wake up lick paw wake up owner meow meow. Drool cattt catt
-          cattty cat being a cat human is in bath tub, emergency! drowning!
-          meooowww!. This human feeds me, i should be a god meow and walk away.
-        </p>
-      </div>
-      <img src="./assets/cat.jpg" class="about-section-image" />
-    </section>
+    <ComponentSection idName="about" classes="about-section">
+      <template v-slot:content="{ title, subtitle }">
+        <h2>{{ title }}</h2>
+        <h3>{{ subtitle }}</h3>
+        <p>{{ aboutContent }}</p>
+      </template>
+      <template v-slot:image>
+        <img src="./assets/cat.jpg" class="about-section-image" />
+      </template>
+    </ComponentSection>
+
     <section id="team" class="team-section">
       <h2>Our team</h2>
-      <ul v-if="cats && cats.length > 0" class="cat-list">
-        <li v-for="(cat, index) in cats" :key="index" class="cat-list__item">
-          <img :src="cat.image" :alt="cat.name" class="cat-list__img" />
-          <section class="cart-list__copy">
-            <h4 class="cat-list__title">{{ cat.name }}</h4>
-            <p class="cat-list__description">{{ cat.description }}</p>
-          </section>
-        </li>
-      </ul>
-      <p v-else>{{ errorMsg }}</p>
-    </section>
-    <section id="contact" class="contact-section">
-      <div class="contact-section-content">
-        <h2>Contact</h2>
-        <p>
-          Plop down in the middle where everybody walks hide from vacuum cleaner
-          mrow curl up and sleep on the freshly laundered towels plays league of
-          legends. Scratch so owner bleeds sit on the laptop bite nose of your
-          human. Cat walks in keyboard ignore the squirrels, you'll never catch
-          them anyway attack the dog then pretend like nothing happened claw at
-          curtains stretch and yawn nibble on tuna ignore human bite human hand,
-          then cats take over the world cereal boxes make for five star
-          accommodation . Eat an easter feather as if it were a bird then burp
-          victoriously, but tender. Leave fur on owners clothes fooled again
-          thinking the dog likes me so spill litter box, scratch at owner,
-          destroy all furniture, especially couch. Chirp at birds scratch the
-          postman wake up lick paw wake up owner meow meow. Drool cattt catt
-          cattty cat being a cat human is in bath tub, emergency! drowning!
-          meooowww!. This human feeds me, i should be a god meow and walk away.
-        </p>
-        <button type="button" class="contact__button">Contact us</button>
-      </div>
-      <img src="./assets/cat-profile.jpg" class="contact-section-image" />
+      <CatsList :items="cats" />
     </section>
 
-    <footer>
-      <a href="#" class="nav-link">Home</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#team" class="nav-link">Our Cats Team</a>
-    </footer>
+    <ComponentSection idName="contact" classes="contact-section">
+      <template v-slot:content>
+        <h2>Contact</h2>
+        <p>{{ contactContent }}</p>
+        <button type="button" class="contact__button">Contact us</button>
+      </template>
+      <template v-slot:image>
+        <img src="./assets/cat-profile.jpg" class="contact-section-image" />
+      </template>
+    </ComponentSection>
   </div>
 </template>
 
 <script>
 import CatsRepository from "./repository/catsRepository.js";
+import ComponentSection from "./components/ContentSection.vue";
+import CatsList from "./components/CatsList.vue";
 
 const repository = new CatsRepository();
 
 export default {
   name: "App",
-  components: {},
+  components: {
+    ComponentSection,
+    CatsList,
+  },
   data() {
     return {
       loading: false,
       cats: [],
       errorMsg: "",
+      aboutContent: "Sphynx kitten ocicat. Munchkin american bobtail. Burmese. Cornish rex puma. Siberian bengal tabby and ocicat but siberian ragdoll. Tiger kitten havana brown donskoy tom jaguar but lynx. Kitty cornish rex for tabby or balinese . Ragdoll burmese so kitty, and donskoy, kitty for singapura. Tom american bobtail turkish angora puma but siamese. Savannah british shorthair cornish rex abyssinian sphynx cornish rex yet lynx.",
+      contactContent: "Sphynx havana brown and british shorthair. Ocicat donskoy or ragdoll so siamese, but siamese singapura. Scottish fold maine coon and bobcat or cheetah sphynx puma. American shorthair donskoy. Birman cornish rex. Scottish fold mouser tomcat. Egyptian mau american shorthair norwegian forest and grimalkin havana brown birman. Havana brown munchkin american bobtail. Singapura american bobtail."
     };
   },
   async mounted() {
@@ -254,6 +223,7 @@ nav {
 .about-section-image,
 .contact-section-image {
   width: 40%;
+  height: 450px;
   object-fit: cover;
 }
 
