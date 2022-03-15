@@ -1,67 +1,67 @@
 <template>
   <div id="app">
-    <!-- navigation -->
     <nav>
       <a href="#" class="nav-link">Home</a>
       <a href="#about" class="nav-link">About</a>
       <a href="#team" class="nav-link">Our Cats Team</a>
     </nav>
-    <section class="home-section">
-      <div class="home-section-content">
-        <h1>Cats</h1>
-        <p class="home__subtitle">Mew to you dear human 😺</p>
-        <button type="button" class="contact__button">Contact us</button>
-      </div>
-    </section>
-    <ComponentSection idName="about" classes="about-section">
-      <template v-slot:content="{ title, subtitle }">
-        <h2>{{ title }}</h2>
+    <HeaderSection />
+    <ContentSection idName="about" classes="about-section">
+      <template v-slot:content="{ aboutTitle, subtitle }">
+        <h2>{{ aboutTitle }}</h2>
         <h3>{{ subtitle }}</h3>
-        <p>{{ aboutContent }}</p>
+        <p>
+          {{ aboutText }}
+        </p>
       </template>
       <template v-slot:image>
         <img src="./assets/cat.jpg" class="about-section-image" />
       </template>
-    </ComponentSection>
+    </ContentSection>
+
 
     <section id="team" class="team-section">
       <h2>Our team</h2>
       <CatsList :items="cats" />
     </section>
 
-    <ComponentSection idName="contact" classes="contact-section">
-      <template v-slot:content>
-        <h2>Contact</h2>
-        <p>{{ contactContent }}</p>
+    <ContentSection idName="contact" class="contact-section">
+      <template v-slot:content="{ contactTitle }">
+        <h2>{{ contactTitle }}</h2>
+        <p>{{ contactText }}</p>
+      </template>
+      <template v-slot:button>
         <button type="button" class="contact__button">Contact us</button>
       </template>
       <template v-slot:image>
         <img src="./assets/cat-profile.jpg" class="contact-section-image" />
       </template>
-    </ComponentSection>
+    </ContentSection>
   </div>
 </template>
 
 <script>
 import CatsRepository from "./repository/catsRepository.js";
-import ComponentSection from "./components/ContentSection.vue";
 import CatsList from "./components/CatsList.vue";
+import HeaderSection from "./components/HeaderSection.vue";
+import ContentSection from "./components/ContentSection.vue";
 
 const repository = new CatsRepository();
 
 export default {
   name: "App",
   components: {
-    ComponentSection,
     CatsList,
+    HeaderSection,
+    ContentSection
   },
   data() {
     return {
       loading: false,
       cats: [],
       errorMsg: "",
-      aboutContent: "Sphynx kitten ocicat. Munchkin american bobtail. Burmese. Cornish rex puma. Siberian bengal tabby and ocicat but siberian ragdoll. Tiger kitten havana brown donskoy tom jaguar but lynx. Kitty cornish rex for tabby or balinese . Ragdoll burmese so kitty, and donskoy, kitty for singapura. Tom american bobtail turkish angora puma but siamese. Savannah british shorthair cornish rex abyssinian sphynx cornish rex yet lynx.",
-      contactContent: "Sphynx havana brown and british shorthair. Ocicat donskoy or ragdoll so siamese, but siamese singapura. Scottish fold maine coon and bobcat or cheetah sphynx puma. American shorthair donskoy. Birman cornish rex. Scottish fold mouser tomcat. Egyptian mau american shorthair norwegian forest and grimalkin havana brown birman. Havana brown munchkin american bobtail. Singapura american bobtail."
+      aboutText: "Sphynx kitten ocicat. Munchkin american bobtail. Burmese. Cornish rex puma. Siberian bengal tabby and ocicat but siberian ragdoll. Tiger kitten havana brown donskoy tom jaguar but lynx. Kitty cornish rex for tabby or balinese . Ragdoll burmese so kitty, and donskoy, kitty for singapura. Tom american bobtail turkish angora puma but siamese. Savannah british shorthair cornish rex abyssinian sphynx cornish rex yet lynx.",
+      contactText: "Sphynx havana brown and british shorthair. Ocicat donskoy or ragdoll so siamese, but siamese singapura. Scottish fold maine coon and bobcat or cheetah sphynx puma. American shorthair donskoy. Birman cornish rex. Scottish fold mouser tomcat. Egyptian mau american shorthair norwegian forest and grimalkin havana brown birman. Havana brown munchkin american bobtail. Singapura american bobtail."
     };
   },
   async mounted() {
@@ -223,7 +223,6 @@ nav {
 .about-section-image,
 .contact-section-image {
   width: 40%;
-  height: 450px;
   object-fit: cover;
 }
 
