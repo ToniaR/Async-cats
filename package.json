@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "node-sass": "^7.0.1",
+    "sass-loader": "^12.6.0",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.15",
@@ -18,7 +21,9 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "sass": "^1.49.9",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^5.70.0"
   },
   "eslintConfig": {
     "root": true,
@@ -32,7 +37,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-console": 1,
+      "no-debugger": 1
+    }
   },
   "browserslist": [
     "> 1%",
