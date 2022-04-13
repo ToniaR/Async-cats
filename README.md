@@ -1,5 +1,5 @@
 # async
-This is the liv coding example how use async features and promises in JavaScript
+This is the live coding example how use async features and promises in JavaScript for Vue Bootcamp presentation
 
 ## Project setup
 ```
